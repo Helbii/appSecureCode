@@ -59,7 +59,7 @@ def local_request(myClock, commandsList) :
             message=myClock[command](_format=format)
             print(message)
 
-        if command == 'setDate':
+        elif command == 'setDate':
             print('format : YYYY-MM-DD HH:MM:SS or YYYY-MM-DD or HH:MM:SS')
             newDate = input('Set ur new date\n')
             myClock[command](_newDate=newDate, _hash=hash)

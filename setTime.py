@@ -12,8 +12,8 @@ def _linux_set_time():
     dateRegex = re.search("[0-2][0-9][0-9][0-9][-][0-1][0-9][-][0-31]", trame)
     timeRegex = re.search("[0-5][0-9][:][0-5][0-9][:][0-5][0-9]", trame)
     datetimeRegex = re.search("[0-2][0-9][0-9][0-9][-][0-1][0-9][-][0-31][ ][0-5][0-9][:][0-5][0-9][:][0-5][0-9]", trame)
-    print('timeregex:'+str(timeRegex))
-    print('dateregex:'+str(dateRegex))
+    #print('timeregex:'+str(timeRegex))
+    #print('dateregex:'+str(dateRegex))
 
     if dateRegex or timeRegex:
         os.system(command + str(trame))
