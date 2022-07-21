@@ -14,8 +14,6 @@ hostName = "localhost"
 
 serverPort = 5000
 
-hash = 'e82b0f05530c49da40abe3c0b251ee126c60f738'
-
 myClock = {
     'getDate': getDate,
     'setDate': setDate
@@ -47,7 +45,7 @@ def server_request():
 
 
 def local_request(myClock, commandsList) :
-    print(hashfile())
+    #print(hashfile())
     command = commandsList[0]
     while True:
         print('commands : ' + commandsList[0] + ',' + commandsList[1] + '\n')

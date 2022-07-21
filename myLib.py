@@ -22,13 +22,16 @@ def hashfile():
 
 
 def setDate(**kwargs):
-    print('hashfile = ' + hashfile())
-    print(kwargs['_hash'])
-    # if hashfile() == kwargs['_hash'] :
-    # print('ok')
-    command = 'sudo python3 setTime.py ' + str(kwargs['_newDate'])
-    err = os.system(command)
-    #print(err)
+    hash = 'f893021e7e298ad51d174b8a2ef3ffd2a9fda2dc'
+    #print('hashfile = ' + hashfile())
+    #print(kwargs['_hash'])
+    if hashfile() == kwargs['_hash'] :
+            # print('ok')
+        command = 'sudo python3 setTime.py ' + str(kwargs['_newDate'])
+        err = os.system(command)
+        #print(err)
+    else :
+        print('The file has been changed ! WARNING !')
 
 
 def getDate(**kwargs):

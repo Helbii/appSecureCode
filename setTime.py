@@ -7,7 +7,7 @@ def _linux_set_time():
     command = 'sudo timedatectl set-time '
     #print(sys.argv)
     trame = sys.argv[1]
-    print(trame)
+    #print(trame)
 
     dateRegex = re.search("[0-2][0-9][0-9][0-9][-][0-1][0-9][-][0-31]", trame)
     timeRegex = re.search("[0-5][0-9][:][0-5][0-9][:][0-5][0-9]", trame)
