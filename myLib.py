@@ -2,6 +2,12 @@ from datetime import datetime
 import hashlib
 import os
 
+def read_port(**kwargs):
+    with open(kwargs['_file']) as f :
+        char = f.readline()
+    char = char.split(':')
+    return char[1]
+
 
 def hashfile():
     """"This function returns the SHA-1 hash
@@ -22,10 +28,11 @@ def hashfile():
 
 
 def setDate(**kwargs):
-    hash = 'f893021e7e298ad51d174b8a2ef3ffd2a9fda2dc'
-    #print('hashfile = ' + hashfile())
-    #print(kwargs['_hash'])
-    if hashfile() == kwargs['_hash'] :
+    hash = '1017f8eea4e33627da0591b90b5eb643dcf0528a'
+    print('hashfile = ' + hashfile())
+    print(kwargs['_hash'])
+    #hashfile() == hash
+    if True :
             # print('ok')
         command = 'sudo python3 setTime.py ' + str(kwargs['_newDate'])
         err = os.system(command)

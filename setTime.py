@@ -1,32 +1,38 @@
 import sys
 import os
 import re
-
+from datetime import datetime
+import time
+import pyprctl
 
 def _linux_set_time():
-    command = 'sudo timedatectl set-time '
-    #print(sys.argv)
-    trame = sys.argv[1]
-    #print(trame)
-
-    dateRegex = re.search("[0-2][0-9][0-9][0-9][-][0-1][0-9][-][0-31]", trame)
-    timeRegex = re.search("[0-5][0-9][:][0-5][0-9][:][0-5][0-9]", trame)
-    datetimeRegex = re.search("[0-2][0-9][0-9][0-9][-][0-1][0-9][-][0-31][ ][0-5][0-9][:][0-5][0-9][:][0-5][0-9]", trame)
-    #print('timeregex:'+str(timeRegex))
-    #print('dateregex:'+str(dateRegex))
-
-    if dateRegex or timeRegex:
-        os.system(command + str(trame))
+    print(sys.argv)
+    try:
+        date = sys.argv[1]
+    except IndexError:
         pass
-    elif datetimeRegex:
-        trame = trame.split(' ')
-        os.system(command + str(trame[0]))
-        os.system(command + str(trame[1]))
+    try:
+        tps = sys.argv[2]
+    except IndexError:
         pass
-    else:
-        print('Wrong format')
+    if date:
+        trame = date
+        timestamp = time.mktime(datetime.strptime(trame, "%Y-%m-%d").timetuple())
+    elif tps:
+        trame = tps
+        timestamp = time.mktime(datetime.strptime(trame, "%H:%M:%S").timetuple())
+    elif tps and date:
+        trame = date + ' ' + tps
+        timestamp = time.mktime(datetime.strptime(trame, "%Y-%m-%d %H:%M:%S").timetuple())
+    else :
+        print("BAD FORMAT")
         exit(1)
-
+    print(timestamp)
+    time.clock_settime(time.CLOCK_REALTIME, timestamp)
 
 if __name__ == '__main__':
+    #Drop all caps if they are not sysTime
+    for cap in pyprctl.caps.Cap:
+        if str(cap) == 'Cap.SYS_TIME' :
+            pyprctl.capbset_drop(cap)
     _linux_set_time()
